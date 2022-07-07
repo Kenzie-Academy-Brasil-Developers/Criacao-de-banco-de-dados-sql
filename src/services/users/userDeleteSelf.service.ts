@@ -1,20 +1,19 @@
 import { AppDataSource } from "../../data-source";
 import { User } from "../../entities/user.entity";
 
-const userDeleteSelfService = async (id : any) => {
-  const userRepository = AppDataSource.getRepository(User);
+const userDeleteSelfService = async (id : string) => {
+  
+  try {
+    const userRepository = AppDataSource.getRepository(User);
 
-  const users = await userRepository.find();
+    await userRepository.delete({ id: id });
 
-  const account = users.find((user) => user.id === id);
-
-  if (!account) {
-    throw new Error("User dont exists");
+    return {message : "user Deleted with sucess"}
+  } catch (error) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    }
   }
-
-  await userRepository.delete(account!.id);
-
-  return true;
 };
 
 export default userDeleteSelfService;

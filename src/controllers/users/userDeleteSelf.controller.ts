@@ -7,7 +7,7 @@ const userDeleteSelfController = async (req: Request, res: Response) => {
 
     const user = await userDeleteSelfService(id);
 
-    return res.status(204).json({ message: "User deleted with sucess!" });
+    return res.status(200).json(user);
   } catch (err) {
     if (err instanceof Error) {
       return res.status(404).send({
