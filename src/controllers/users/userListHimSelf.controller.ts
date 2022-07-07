@@ -10,7 +10,7 @@ const userListHimSelfController = async (req: Request, res: Response) => {
     return res.status(200).send(user);
   } catch (err) {
     if (err instanceof Error) {
-      return res.status(400).send({
+      return res.status(404).send({
         error: err.name,
         message: err.message,
       });
